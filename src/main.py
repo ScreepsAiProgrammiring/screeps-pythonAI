@@ -17,7 +17,7 @@ __pragma__('noalias', 'set')
 __pragma__('noalias', 'type')
 __pragma__('noalias', 'update')
 
-MAIN_SPAWN_NAME = 'Spawn1'
+MAIN_SPAWN_NAME = 'Spawnn1'
 
 def main():
     """
@@ -34,13 +34,26 @@ def main():
         Game.creeps, lambda creep: creep.memory.role == 'harvester')
     console.log('Harvesters: ' + len(harvesters))
 
-    if len(harvesters) < 2:
+    if len(harvesters) < 1:
         newName = 'Harvester' + Game.time
         console.log('Spawning new harvester: ' + newName)
         Game.spawns[MAIN_SPAWN_NAME].spawnCreep(
             [WORK, CARRY, MOVE],
             newName,
             {'memory': {'role': 'harvester'}}
+        )
+
+    upgraders = _.filter(
+        Game.creeps, lambda creep: creep.memory.role == 'upgrader')
+    console.log('Upgraders: ' + len(upgraders))
+    
+    if len(upgraders) < 5:
+        newName = 'Upgrader' + Game.time
+        console.log('Spawning new upgrader: ' + newName)
+        Game.spawns[MAIN_SPAWN_NAME].spawnCreep(
+            [WORK, CARRY, MOVE],
+            newName,
+            {'memory': {'role': 'upgrader'}}
         )
 
     if Game.spawns[MAIN_SPAWN_NAME].spawning:
